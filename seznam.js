@@ -105,13 +105,13 @@ const filmy = [
 	},
 ]
 
-// Select the container
+
 const filmList = document.querySelector('#seznam-filmu');
 
-// Clear the container
+
 filmList.innerHTML = '';
 
-// Loop through the films and add their HTML
+
 filmy.forEach(film => {
     filmList.insertAdjacentHTML('beforeend', `
         <div class="col">
