@@ -104,3 +104,67 @@ const filmy = [
 		premiera: '2022-12-24',
 	},
 ]
+
+
+const movieId = location.hash.slice(1);
+
+
+const movie = filmy.find(film => film.id === movieId);
+
+
+if (movie) {
+    const detailContainer = document.querySelector('#detail-filmu');
+
+    
+    const poster = detailContainer.querySelector('img');
+    poster.src = movie.plakat.url;
+    poster.width = movie.plakat.sirka;
+    poster.height = movie.plakat.vyska;
+
+    
+    const title = detailContainer.querySelector('.card-title');
+    title.textContent = movie.nazev;
+
+    const description = detailContainer.querySelector('.card-text');
+    description.textContent = movie.popis;
+
+    const premiere = detailContainer.querySelector('#premiera strong');
+    premiere.textContent = movie.premiera;
+}
+
+const noteForm = document.querySelector('#note-form');
+const messageInput = document.querySelector('#message-input');
+const termsCheckbox = document.querySelector('#terms-checkbox');
+
+
+noteForm.addEventListener('submit', (event) => {
+    event.preventDefault(); 
+
+    let isValid = true;
+
+    
+    if (messageInput.value.trim() === '') {
+        messageInput.classList.add('is-invalid');
+        messageInput.focus(); 
+        isValid = false;
+    } else {
+        messageInput.classList.remove('is-invalid');
+    }
+
+    
+    if (!termsCheckbox.checked) {
+        termsCheckbox.classList.add('is-invalid');
+        termsCheckbox.focus(); 
+        isValid = false;
+    } else {
+        termsCheckbox.classList.remove('is-invalid');
+    }
+
+    
+    if (isValid) {
+        
+        noteForm.innerHTML = `
+            <p class="card-text">${messageInput.value.trim()}</p>
+        `;
+    }
+});
